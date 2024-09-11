@@ -7,7 +7,7 @@ function CoinTable({currency}){
     const [page , setPage] = useState(1);
 
     const { data, isLoading , error, isError} = useQuery({
-        queryKey: ['coins', page], // Use 'queryKey' instead of positional argument
+        queryKey: ['coins', page, currency], // Use 'queryKey' instead of positional argument
         queryFn: () => FetchCoinData(page, currency), // Use 'queryFn' instead of positional argument
         cacheTime: 1000 * 2 * 60, // Still part of the options
         staleTime: 1000 * 2 * 60, // Still part of the options
@@ -29,13 +29,14 @@ function CoinTable({currency}){
 
     return(
         <div>
+            
             <div className="flex flex-col items-center justify-center w-[80vw] my-5 mx-auto">
                 <div className="flex items-center justify-center bg-yellow-400 w-full gap-3 py-5 px-5 font-semibold text-2xl text-black text-center ">
                     <div className="basis-[35%]">
                         Coin
                     </div>
                     <div className="basis-[20%]">
-                        Price
+                        Price <span className="uppercase">({currency})</span>
                     </div>
                     <div className="basis-[20%]">
                         Low 24h

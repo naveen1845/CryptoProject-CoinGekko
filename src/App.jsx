@@ -7,12 +7,12 @@ import Banner from './Components/Banner/banner'
 import CoinTable from './Components/CoinTable/CoinTable'
 
 function App() {
-
+  const [currency, setCurrency] = useState('inr')
   return(
     <>
-    <Navbar />
+    <Navbar setCurrency= {setCurrency}/>
     <Banner />
-    <CoinTable />
+    <CoinTable currency={currency}/>
     </>
   )
 }
