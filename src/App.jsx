@@ -5,15 +5,11 @@ import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Banner from './Components/Banner/Banner'
 import CoinTable from './Components/CoinTable/CoinTable'
+import Home from './Pages/Home'
 
 function App() {
-  const [currency, setCurrency] = useState('inr')
   return(
-    <>
-    <Navbar setCurrency= {setCurrency}/>
-    <Banner />
-    <CoinTable currency={currency}/>
-    </>
+    <Home />
   )
 }
 

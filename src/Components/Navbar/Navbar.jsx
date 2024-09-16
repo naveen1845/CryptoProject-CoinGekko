@@ -1,4 +1,7 @@
-function Navbar({setCurrency}){
+import CurrencyStore from "../../Store/CurrencyStore";
+
+function Navbar(){
+  const {setCurrency} = CurrencyStore()
     return (
         <div className="navbar bg-base-100">
   <div className="navbar-start">
