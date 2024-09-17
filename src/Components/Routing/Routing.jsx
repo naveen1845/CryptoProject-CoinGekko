@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import MainLayout from "../../Pages/Layout"
 import { lazy, Suspense } from "react"
+import MyCustomLoader from "../Loaders/MyCustomLoader";
 
 const Home = lazy(() => import("../../Pages/Home"));
 const CoinDetails = lazy(() => import("../../Pages/CoinDetails"))
@@ -11,7 +12,7 @@ function Routing() {
             <Route path="/" element = {<MainLayout/>}>
 
                 <Route index element = {
-                    <Suspense fallback={<>Loading Home..</>}>
+                    <Suspense fallback={<MyCustomLoader/>}>
                         <Home />
                     </Suspense>
                  }
@@ -19,7 +20,7 @@ function Routing() {
 
 
                 <Route path="/details/:coinId" element={
-                    <Suspense fallback={<>Loading details..</>}>
+                    <Suspense fallback={<MyCustomLoader/>}>
                         <CoinDetails />
                     </Suspense>
                  } 

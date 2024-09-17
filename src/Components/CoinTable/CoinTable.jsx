@@ -3,6 +3,7 @@ import { FetchCoinData } from "../../services/FetchCoinData";
 import { useQuery } from "@tanstack/react-query";
 import CurrencyStore from "../../Store/CurrencyStore";
 import { useNavigate } from "react-router-dom";
+import MyBulletListLoader from "../Loaders/BulletListLoader";
 
 function CoinTable(){
 
@@ -55,7 +56,7 @@ function CoinTable(){
                 </div>
 
                 <div className="flex flex-col items-center justify-center w-[80vw] my-5 mx-auto">
-                    {isLoading && <div>Loading...</div>}
+                    {isLoading && <MyBulletListLoader/>}
                     {data && data.map(coin => {
                         return(
                             <div key={coin.id} onClick={() => handleCoinDetailsRedirect(coin.id)} className="flex items-center justify-center w-full gap-3 py-5 px-5 cursor-pointer">
