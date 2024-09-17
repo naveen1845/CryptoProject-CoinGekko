@@ -31,8 +31,8 @@ function CoinDetails() {
 
     return(
         <div className="flex flex-col md:flex-row">
-            <div className="flex flex-col w-full md:w-1/3 border-slate-400 border-r-2">
-                <div className="flex flex-row gap-5 items-center justify-center my-5">
+            <div className="flex flex-col w-full md:w-1/3 md:border-slate-400 md:border-r-2">
+                <div className="flex flex-row gap-5 items-center justify-center my-5 px-10">
                     <div>
                         <img 
                         src={coin?.image?.large} 
@@ -58,7 +58,7 @@ function CoinDetails() {
                     </p>
                 </div>
 
-                <div className="flex flex-col md:flex-row justify-around py-2 px-5">
+                <div className="flex flex-col justify-around py-2 px-5">
                     <div className="flex flex-row gap-2">
                         <h1 className="text-2xl font-bold text-yellow-500">Rank:</h1>
                         <p className="text-2xl font-bold">{coin.market_cap_rank}</p>
