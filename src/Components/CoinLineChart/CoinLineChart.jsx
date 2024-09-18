@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
 import Alert from "../Alert/Alert";
@@ -62,7 +62,9 @@ function CoinLineChart({ historicData , currency , days, setDays, setChartInterv
                             data: historicData.prices.map((coinPrice) => coinPrice[1]),
                             borderColor: 'rgba(75, 192, 192, 1)', 
                             backgroundColor: 'rgba(75, 192, 192, 0.2)', 
-                            fill: true
+                            fill: true,
+                            borderWidth: 1,
+                            pointStyle: false
                         },
                         ],
                     }}
@@ -71,6 +73,34 @@ function CoinLineChart({ historicData , currency , days, setDays, setChartInterv
                         responsive: true
                     }}
                 />
+
+
+
+            </div>
+
+            <div className="w-full h-[400px] p-5">
+            <Bar
+                data={{
+                    labels: historicData.prices.map(coinPrice => {
+                        let date = new Date(coinPrice[0]);
+                        let time = date.getHours() > 12 ? `${date.getHours() - 12}:${date.getMinutes()} PM` : `${date.getHours()}:${date.getMinutes()} AM`;
+                        return days == 1 ? time : date.toLocaleDateString() + " " + time;
+                    }),
+                    datasets: [
+                    {
+                        label: `Price (last ${days} ${days == 1 ? 'day' : 'days'}) in ${currency.toUpperCase()}`,
+                        data: historicData.prices.map((coinPrice) => coinPrice[1]),
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor:'rgba(255, 99, 132, 1)',
+                        borderWidth: 0.5,
+                    },
+                    ],
+                }}
+                options={{
+                    maintainAspectRatio: false,
+                    responsive: true
+                }}
+            />
 
             </div>
             <div>
