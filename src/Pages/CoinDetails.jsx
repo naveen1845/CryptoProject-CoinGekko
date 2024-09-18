@@ -4,6 +4,7 @@ import { FetchCoinDetails } from "../services/fecthCoinDetails";
 import parse from 'html-react-parser';
 import CurrencyStore from "../Store/CurrencyStore";
 import MyCustomLoader from "../Components/Loaders/MyCustomLoader";
+import CoinLineChartContainer from "../Components/CoinLineChart/CoinLineChartContainer";
 
 function CoinDetails() {
 
@@ -25,11 +26,6 @@ function CoinDetails() {
         console.log(Error);
     }
 
-    if(coin){
-        console.log(coin);
-        
-    }
-
     return(
         <div className="flex flex-col md:flex-row">
             <div className="flex flex-col w-full md:w-1/3 md:border-slate-400 md:border-r-2">
@@ -37,7 +33,6 @@ function CoinDetails() {
                     <div>
                         <img 
                         src={coin?.image?.large} 
-                        alt={coin.id} 
                         />
                     </div>
                     <div>
@@ -70,7 +65,9 @@ function CoinDetails() {
                     </div>
                 </div>
             </div>
-            <div>Price-Plot Chart</div>
+            <div className="flex flex-col w-full md:2/3">
+                <CoinLineChartContainer coinId={coinId}/>
+            </div>
         </div>
     )
 }
