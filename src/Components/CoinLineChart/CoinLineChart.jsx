@@ -1,6 +1,7 @@
 import { Line } from "react-chartjs-2";
 import { CategoryScale } from 'chart.js';
 import Chart from "chart.js/auto";
+import Alert from "../Alert/Alert";
 
 function CoinLineChart({ historicData , currency , days, setDays, setChartInterval }){
     Chart.register(CategoryScale);
@@ -37,6 +38,10 @@ function CoinLineChart({ historicData , currency , days, setDays, setChartInterv
             setChartInterval('daily');
         }
         setDays(e.target.options[e.target.selectedIndex].value);
+    }
+
+    if (!historicData) {
+        return <Alert message={"No Chart Data available"} type={"warning"} />
     }
 
 

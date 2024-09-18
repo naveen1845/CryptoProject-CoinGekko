@@ -5,6 +5,7 @@ import parse from 'html-react-parser';
 import CurrencyStore from "../Store/CurrencyStore";
 import MyCustomLoader from "../Components/Loaders/MyCustomLoader";
 import CoinLineChartContainer from "../Components/CoinLineChart/CoinLineChartContainer";
+import Alert from "../Components/Alert/Alert";
 
 function CoinDetails() {
 
@@ -23,7 +24,7 @@ function CoinDetails() {
     }
 
     if(isError){
-        console.log(Error);
+        return <Alert message={"error Fecthing Coin details"} type={"error"} />
     }
 
     return(

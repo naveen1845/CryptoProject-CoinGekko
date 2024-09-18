@@ -3,6 +3,7 @@ import fetchCoinHistoricData from "../../services/fecthCoinHistoricData";
 import CurrencyStore from "../../Store/CurrencyStore";
 import { useState } from "react";
 import CoinLineChart from "./CoinLineChart";
+import Alert from "../Alert/Alert";
 
 function CoinLineChartContainer({ coinId }){
     const {currency} = CurrencyStore()
@@ -26,7 +27,7 @@ function CoinLineChartContainer({ coinId }){
     }
 
     if (isError) {
-        console.log(Error);
+        return <Alert message={"error fecthing Char details"} type={"error"} />
         
     }
 
