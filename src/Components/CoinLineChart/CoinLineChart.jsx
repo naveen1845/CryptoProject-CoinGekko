@@ -81,15 +81,15 @@ function CoinLineChart({ historicData , currency , days, setDays, setChartInterv
             <div className="w-full h-[400px] p-5">
             <Bar
                 data={{
-                    labels: historicData.prices.map(coinPrice => {
-                        let date = new Date(coinPrice[0]);
+                    labels: historicData.total_volumes.map(coinVolumes => {
+                        let date = new Date(coinVolumes[0]);
                         let time = date.getHours() > 12 ? `${date.getHours() - 12}:${date.getMinutes()} PM` : `${date.getHours()}:${date.getMinutes()} AM`;
                         return days == 1 ? time : date.toLocaleDateString() + " " + time;
                     }),
                     datasets: [
                     {
-                        label: `Price (last ${days} ${days == 1 ? 'day' : 'days'}) in ${currency.toUpperCase()}`,
-                        data: historicData.prices.map((coinPrice) => coinPrice[1]),
+                        label: `Volume (last ${days} ${days == 1 ? 'day' : 'days'})}`,
+                        data: historicData.total_volumes.map((coinVolumes) => coinVolumes[1]),
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor:'rgba(255, 99, 132, 1)',
                         borderWidth: 0.5,
