@@ -5,12 +5,16 @@ import CurrencyStore from "../../Store/CurrencyStore";
 import { useNavigate } from "react-router-dom";
 import MyBulletListLoader from "../Loaders/BulletListLoader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Alert from "../Alert/Alert";
+import { useState } from "react";
 
 function CoinTable(){
 
     
     const {currency} = CurrencyStore();
     const navigate = useNavigate();
+    const [searchItems, setSearchItems] = useState('');
+
 
     function handleCoinDetailsRedirect(id) {
         navigate(`/details/${id}`)
@@ -25,28 +29,43 @@ function CoinTable(){
         error, } = useInfiniteQuery({
         queryKey : ['coins' , currency],
         queryFn : ({ pageParam = 1 }) => FetchCoinData(pageParam, currency),
-        getNextPageParam : (lastPage , allPages) => lastPage.length ? allPages.length + 1 : undefined,
+        getNextPageParam : (lastPage , allPages) => !lastPage || lastPage.length == 0 ? undefined : allPages.length + 1,
         cacheTime : 1000 * 60 * 2,
         staleTime : 1000 * 60 * 2,
     })
 
+    
+    const filteredItems = data?.pages.flat().filter((item) => {
+        let coinId = `${item.id}`
+        if(coinId.toLowerCase().includes(searchItems.toLowerCase())){
+            return item;
+        }
+    })
+
 
     if (isError) {
-        console.log(error);
+        return <Alert message={"Error Fetching Table Details" } type={"error"}/>;
         
     }
 
-    if(data){
-        const page = data.pages[0];
-        const coin = page[0];
-        console.log(coin.id);
-        
-    }
+    
 
     return(
         
             
             <div className="flex flex-col items-center justify-center w-[80vw] my-5 mx-auto">
+                
+            <input 
+                type="text"
+                value={searchItems}
+                placeholder="Search Coins here..."
+                onChange={(event) => {
+                    console.log(event.target.value);
+                    setSearchItems(event.target.value);
+                }}
+                className="mb-5 p-3 border border-gray-300 rounded" 
+            />
+
                 <div className="flex items-center justify-center bg-yellow-400 w-full gap-3 py-5 px-5 font-semibold text-2xl text-black text-center ">
                     <div className="basis-[35%]">
                         Coin
@@ -66,7 +85,6 @@ function CoinTable(){
                     dataLength={data ? data.pages.flat().length : 0} 
                     next={fetchNextPage}
                     hasMore={hasNextPage}
-                    loader={<MyBulletListLoader/>}
                     endMessage={
                     <p style={{ textAlign: 'center' }}>
                         <b>Yay! You have seen it all</b>
@@ -74,10 +92,9 @@ function CoinTable(){
                     }
                 >
                 <div className="flex flex-col items-center justify-center w-[80vw] my-5 mx-auto">
-                    {data && data?.pages.flat().map((coin) => {
-                        return(
-                            
-                                <div key={coin.id} onClick={() => handleCoinDetailsRedirect(coin.id)} className="flex items-center justify-center w-full gap-3 py-5 px-5 cursor-pointer">
+                    {filteredItems && filteredItems.length > 0 ? (filteredItems.map((coin) => {
+                        return (
+                            <div key={coin.id} onClick={() => handleCoinDetailsRedirect(coin.id)} className="flex items-center justify-center w-full gap-3 py-5 px-5 cursor-pointer">
                                 <div className="flex gap-5 basis-[35%]">
                                     <div className="w-[5rem] h-[5rem]">
                                         <img src={coin.image} alt="" className="w-full h-full"/>
@@ -98,12 +115,13 @@ function CoinTable(){
                                     {coin.high_24h}
                                 </div>
                             </div>
-                            
                         )
-                    })}
+                    })) : (<div>No Coin Found</div>) }
+                    
+                    {isLoading && <MyBulletListLoader/>}
+        
                 </div>
                 </InfiniteScroll>
-                {isFetchingNextPage && <MyBulletListLoader />}
             </div>
 
     )

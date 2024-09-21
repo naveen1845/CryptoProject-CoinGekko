@@ -27,7 +27,7 @@ function CoinLineChartContainer({ coinId }){
     }
 
     if (isError) {
-        return <Alert message={"error fecthing Char details"} type={"error"} />
+        return <Alert message={"error fecthing Chart details"} type={"error"} />
         
     }
 
