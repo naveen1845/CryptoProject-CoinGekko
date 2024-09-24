@@ -88,7 +88,7 @@ function CoinLineChart({ historicData , currency , days, setDays, setChartInterv
                     }),
                     datasets: [
                     {
-                        label: `Volume (last ${days} ${days == 1 ? 'day' : 'days'})}`,
+                        label: `Volume (last ${days} ${days == 1 ? 'day' : 'days'}) }`,
                         data: historicData.total_volumes.map((coinVolumes) => coinVolumes[1]),
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor:'rgba(255, 99, 132, 1)',
