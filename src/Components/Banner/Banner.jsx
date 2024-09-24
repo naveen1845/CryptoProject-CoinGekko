@@ -2,7 +2,7 @@ import BannerImg from "../../assets/banner1.jpeg"
 
 function Banner(){
     return(
-        <div className="w-100 relative">
+        <div className="w-100 relative text-white">
 
             <img src={BannerImg} alt="" className="w-full h-[20rem]"/>
 

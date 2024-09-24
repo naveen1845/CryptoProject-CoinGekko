@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import CurrencyStore from "../../Store/CurrencyStore";
 import SearchBox from "../SearchBox/SearchBox";
 import { useState } from "react";
+import SwapThemeBtn from "../SwapThemeBtn/SwapThemeBtn";
 
 function Navbar(){
   const {setCurrency} = CurrencyStore()
@@ -18,12 +19,12 @@ function Navbar(){
 
   return (
         <div className="navbar bg-base-100">
-   <div className="navbar-start">
+   <div className="navbar-start flex gap-3">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
+          className="h-7 w-7"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor">
@@ -41,6 +42,7 @@ function Navbar(){
         <li><a onClick={() => setCurrency('usd')}>USD</a></li>
       </ul>
     </div>
+    <SwapThemeBtn />
   </div>
   <div onClick={ goToHome } className="navbar-center">
     <a className="btn btn-ghost text-xl">Coin Tracker</a>

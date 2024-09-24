@@ -24,7 +24,7 @@ function SearchBox() {
                     {isLoading && <span className="loading loading-dots loading-lg"></span>}
                     {(data && data.length == 0) && <li>No Coin Found</li>}
                     {isError && <span>Error Fetching Data</span>}
-                    {data && data?.map(item => <div className='mb-2 w-full' key={item.id}><SearchItem coinData={item}/></div>)}
+                    {data && data?.map(item => <div className='mb-2 w-full' key={item.id}><SearchItem setSearchText={setSearchText}  coinData={item}/></div>)}
                 </ul>}
             </div>
         </div>
